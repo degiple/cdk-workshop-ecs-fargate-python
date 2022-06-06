@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "cdk-workshop-ecs-fargate-python"
+version = "0.1.0"
+description = ""
+authors = ["Konosuke Tekeshima"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+aws-cdk-lib = "^2.27.0"
+constructs = "^10.1.28"
+python-dotenv = "^0.20.0"
+exceptiongroup = "^1.0.0-rc.7"
+
+[tool.poetry.dev-dependencies]
+black = "^22.3.0"
+pytest = "^7.1.2"
+isort = "^4.0.1"
+flake8 = "^4.0.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

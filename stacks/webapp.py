@@ -4,7 +4,6 @@ from aws_cdk import aws_ec2 as ec2
 from aws_cdk import aws_ecs as ecs
 from aws_cdk import aws_ecs_patterns as ecs_patterns
 from aws_cdk import aws_elasticloadbalancingv2 as elb
-from aws_cdk import aws_route53 as route53
 from constructs import Construct
 
 from stacks.common import StackProps
@@ -14,12 +13,12 @@ class WebAppStack(Stack):
     def __init__(
         self,
         scope: Construct,
-        id: str,
-        sysname: str,
+        construct_id: str,
         vpc: ec2.Vpc,
+        props: StackProps,
         **kwargs,
     ) -> None:
-        super().__init__(scope, id, **kwargs)
+        super().__init__(scope, construct_id, **kwargs)
 
         app_name = "webapp"
 
@@ -37,11 +36,16 @@ class WebAppStack(Stack):
         #      | 21504, 22528, 23552, 24576, 25600, 26624, 2764, 28672, 2969, 30720
         fargate_task_definition = ecs.FargateTaskDefinition(
             self,
-            id=f"{sysname}-{app_name}-ecs-task-definition",
+            id=f"{props.sys_stage}-ecs-task-definition",
             family=props.ecs_task_definition(app_name).name,
-            cpu=,
-            memory_limit_mib=,
+            cpu=256,
+            memory_limit_mib=512,  # 問題候補：あえて存在しない組み合わせにする？
         )
+
+        # first time daploy settings
+        image = ecs.ContainerImage.from_registry(
+            "amazon/amazon-ecs-sample"
+        )  # 問題候補：空にしておく？
 
         # Add app to containers
         container_app = fargate_task_definition.add_container(
@@ -56,8 +60,6 @@ class WebAppStack(Stack):
 
         container_app.add_port_mappings(ecs.PortMapping(container_port=80))
 
-        self.__container_app_name = container_app.container_name
-
         ##############################
         # Create ECS Cluster, Service and ALB
         ##############################
@@ -67,18 +69,18 @@ class WebAppStack(Stack):
             id="WebappApplicationLoadBalancedFargateService",
             cluster=ecs.Cluster(
                 self,
-                id="WebappFargateåCluster",
+                id="WebappFargateCluster",
                 cluster_name=props.ecs_cluster().name,
                 vpc=vpc,
             ),
             task_definition=fargate_task_definition,
             service_name=props.ecs_service(app_name).name,
-            protocol=elb.ApplicationProtocol.HTTPS,
-            listener_port=443,  # for ALB
-            redirect_http=True,
+            # protocol=elb.ApplicationProtocol.HTTPS,
+            # listener_port=443,  # for ALB
+            # redirect_http=True,
             target_protocol=elb.ApplicationProtocol.HTTP,
             desired_count=1,
-            health_check_grace_period=cdk.Duration.seconds(60),  # Default: 60s 
+            health_check_grace_period=cdk.Duration.seconds(60),  # Default: 60s
             enable_ecs_managed_tags=True,
         )
 
@@ -91,12 +93,20 @@ class WebAppStack(Stack):
         )
 
         # Quickly deregistration delay of alb target
-        albfs.target_group.set_attribute(key="deregistration_delay.timeout_seconds", value="5")  # Default: 300s
+        albfs.target_group.set_attribute(
+            key="deregistration_delay.timeout_seconds", value="5"
+        )  # Default: 300s
 
         # Configure Auto Scaling
-        scalable_target = albfs.service.auto_scale_task_count(min_capacity=2, max_capacity=10)
-        scalable_target.scale_on_cpu_utilization("CpuScaling", target_utilization_percent=50)
-        scalable_target.scale_on_memory_utilization("MemoryScaling", target_utilization_percent=80)
+        scalable_target = albfs.service.auto_scale_task_count(
+            min_capacity=2, max_capacity=10
+        )
+        scalable_target.scale_on_cpu_utilization(
+            "CpuScaling", target_utilization_percent=50
+        )
+        scalable_target.scale_on_memory_utilization(
+            "MemoryScaling", target_utilization_percent=80
+        )
 
         self.__service = albfs.service
 

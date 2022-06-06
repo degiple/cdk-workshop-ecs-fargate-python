@@ -26,6 +26,10 @@
     "@aws-cdk/core:target-partitions": [
       "aws",
       "aws-cn"
-    ]
+    ],
+    "account": "<your-aws-account-number>",
+    "region": "ap-northeast-1",
+    "sysname": "cocrea",
+    "stage": "dev"
   }
 }

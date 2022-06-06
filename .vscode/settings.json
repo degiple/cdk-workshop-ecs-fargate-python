@@ -1,11 +1,10 @@
 {
   "workbench.iconTheme": "material-icon-theme",
-  "workbench.colorTheme": "GitHub Dark Dimmed",
-  "editor.formatOnSave": true,
+  "editor.formatOnS ave": true,
   "files.autoSave": "afterDelay",
   // black
   "python.formatting.provider": "black",
-  "python.formatting.blackArgs": ["--line-length", "119"],
+  "python.formatting.blackArgs": ["--line-length", "80"],
   // isort
   "editor.codeActionsOnSave": {
     "source.organizeImports": true

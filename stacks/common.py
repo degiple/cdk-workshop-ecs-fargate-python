@@ -5,7 +5,6 @@ from typing import Optional
 
 import aws_cdk as cdk
 from constructs import Construct
-from dotenv import load_dotenv
 
 
 class StackProps:
@@ -16,19 +15,19 @@ class StackProps:
     def __init__(
         self,
         sysname: Optional[str],
-        env: Optional[str],
+        stage: Optional[str],
     ):
         if not sysname:
-            print("Please enter a value for SYSTEM_NAME in .env")
+            print("Please enter a value for SYSTEM_NAME in .stage")
             sys.exit(1)
         else:
             self.__sysname = sysname
 
-        if not env:
-            print("Please enter a value for ENV in .env")
+        if not stage:
+            print("Please enter a value for ENV in .stage")
             sys.exit(1)
         else:
-            self.__env = env
+            self.__stage = stage
 
         """
         可変リソース名. vpcやrdsなどリソースのnameやidを取得する際の一時定義用
@@ -42,12 +41,12 @@ class StackProps:
         return self.__sysname
 
     @property
-    def env(self) -> str:
-        return self.__env
+    def stage(self) -> str:
+        return self.__stage
 
     @property
-    def sysname_env(self) -> str:
-        return f"{self.sysname}-{self.env}"
+    def sys_stage(self) -> str:
+        return f"{self.sysname}-{self.stage}"
 
     @property
     # リソース名を取得するメソッドチェーン用Getter. リソース名はKebab型
@@ -68,21 +67,21 @@ class StackProps:
         """
         スタック名を一意に生成. システム名+環境名とStackの記述(例: db-appなど)から生成.
         """
-        self.__name = self.sysname_env + "-" + stack_desc + "-stack"
+        self.__name = self.sys_stage + "-" + stack_desc + "-stack"
         return self
 
     def ssm_key(self, app_name: str):
         """
         SSM_Key名を一意に生成. システム名+環境名とアプリ名を利用.
         """
-        self.__name = f"{self.sysname_env}-{app_name}-key"
+        self.__name = f"{self.sys_stage}-{app_name}-key"
         return self
 
     def vpc(self):
         """
         VPC名を一意に生成. システム名+環境名を利用.
         """
-        self.__name = self.sysname_env + "-vpc"
+        self.__name = self.sys_stage + "-vpc"
         return self
 
     def subnet(self, nlayer, number=-1):
@@ -90,140 +89,140 @@ class StackProps:
         Subnet名を一意に生成. システム名+環境名, ネットワークレイヤ(例: public, private)と通し番号(なくても良い)を利用.
         """
         number_str = "-" + str(number) if number > -1 else ""
-        self.__name = self.sysname_env + "-" + nlayer + "-subnet" + number_str
+        self.__name = self.sys_stage + "-" + nlayer + "-subnet" + number_str
         return self
 
     def security_group(self, app_name):
         """
         Security Group名を一意に生成. システム名+環境名, SGを付与するアプリ名を利用.
         """
-        self.__name = self.sysname_env + "-" + app_name + "-sg"
+        self.__name = self.sys_stage + "-" + app_name + "-sg"
         return self
 
     def s3_bucket(self, bucket_name):
         """
         S3 Bucket名を一意に生成. システム名+環境名, Bucket名を利用.
         """
-        self.__name = self.sysname_env + "-" + bucket_name + "-bucket"
+        self.__name = self.sys_stage + "-" + bucket_name + "-bucket"
         return self
 
     def codebuild_pipeline_project(self, app_name):
         """
         CodeBuildのPipeline Project名を一意に生成. システム名+環境名, アプリ名を利用.
         """
-        self.__name = self.sysname_env + "-" + app_name + "-codebuild-pipeline-project"
+        self.__name = self.sys_stage + "-" + app_name + "-codebuild-pipeline-project"
         return self
 
     def codepipeline(self, app_name):
         """
         CodePipeline名を一意に生成. システム名+環境名, アプリ名を利用.
         """
-        self.__name = self.sysname_env + "-" + app_name + "-codepipeline"
+        self.__name = self.sys_stage + "-" + app_name + "-codepipeline"
         return self
 
     def codepipeline_source_artifact(self, app_name):
         """
         CodePipelineの生成物名を一意に生成. システム名+環境名, アプリ名を利用.
         """
-        self.__name = self.sysname_env + "-" + app_name + "codepipeline-source-artifact"
+        self.__name = self.sys_stage + "-" + app_name + "codepipeline-source-artifact"
         return self
 
     def codepipeline_build_artifact(self, app_name):
         """
         CodePipelineの生成物名を一意に生成. システム名+環境名, アプリ名を利用.
         """
-        self.__name = self.sysname_env + "-" + app_name + "-codepipeline-build-artifact"
+        self.__name = self.sys_stage + "-" + app_name + "-codepipeline-build-artifact"
         return self
 
     def secretsmanager(self, app_name):
         """
         SecretsManagerのSecrets名を一意に生成. システム名+環境名, アプリ名を利用.
         """
-        self.__name = self.sysname_env + "-" + app_name + "-secretsmanager-secrets"
+        self.__name = self.sys_stage + "-" + app_name + "-secretsmanager-secrets"
         return self
 
     def iam_role(self, role_name):
         """
         IamRole名を一意に生成. システム名+環境名, ロール名を付与するアプリ名を利用.
         """
-        self.__name = self.sysname_env + "-" + role_name + "-role"
+        self.__name = self.sys_stage + "-" + role_name + "-role"
         return self
 
     def iam_role_policy(self, policy_name):
         """
         IamRole名を一意に生成. システム名+環境名, ロール名を付与するアプリ名を利用.
         """
-        self.__name = self.sysname_env + "-" + policy_name + "-role-policy"
+        self.__name = self.sys_stage + "-" + policy_name + "-role-policy"
         return self
 
     def instance_profile(self, profile_name):
         """
         IamRole名を一意に生成. システム名+環境名, ロール名を付与するアプリ名を利用.
         """
-        self.__name = self.sysname_env + "-" + profile_name + "-instance-profile"
+        self.__name = self.sys_stage + "-" + profile_name + "-instance-profile"
         return self
 
     def ecs_cluster(self):
         """
         ECS Cluster名(Fargateも)を一意に生成. システム名+環境名を利用.
         """
-        self.__name = self.sysname_env + "-ecs-cluster"
+        self.__name = self.sys_stage + "-ecs-cluster"
         return self
 
     def ecr_repository(self, app_name):
         """
         ECS レポジトリ 名を一意に生成. システム名+環境名, アプリ名を利用.
         """
-        self.__name = self.sysname_env + "-" + app_name + "-ecr-repository"
+        self.__name = self.sys_stage + "-" + app_name + "-ecr-repository"
         return self
 
     def ecs_service(self, app_name):
         """
         ECS Service名を一意に生成. システム名+環境名, アプリ名を利用.
         """
-        self.__name = self.sysname_env + "-" + app_name + "-ecs-service"
+        self.__name = self.sys_stage + "-" + app_name + "-ecs-service"
         return self
 
     def ecs_task_definition(self, definition_name):
         """
         ECR Task定義名を一意に生成. システム名+環境名, 定義名を利用.
         """
-        self.__name = self.sysname_env + "-" + definition_name + "-ecs-task-definition"
+        self.__name = self.sys_stage + "-" + definition_name + "-ecs-task-definition"
         return self
 
     def ecs_container_name(self, app_name, container_name):
         """
         ECS コンテナ名を一意に生成. システム名+環境名, アプリ名, コンテナ種(appやdbなど)を付与するアプリ名を利用.
         """
-        self.__name = self.sysname_env + "-" + app_name + "-" + container_name + "-container"
+        self.__name = self.sys_stage + "-" + app_name + "-" + container_name + "-container"
         return self
 
     def log_prefix(self, app_name):
         """
         Logに付与するPrefixを一意に生成. システム名+環境名, アプリ名を利用.
         """
-        self.__name = self.sysname_env + "-" + app_name + "-"
+        self.__name = self.sys_stage + "-" + app_name + "-"
         return self
 
     def log_group(self, app_name, sub_name):
         """
         Logに付与するPrefixを一意に生成. システム名+環境名, アプリ名を利用.
         """
-        self.__name = f"{self.sysname_env}-{app_name}-{sub_name}"
+        self.__name = f"{self.sys_stage}-{app_name}-{sub_name}"
         return self
 
     def rds(self, db_name):
         """
         RDSのインスタンス名(≠ Clusterを構成するEC2インスタンス)を一意に生成. システム名+環境名, DB名を利用. Classmethodの規則と異なる点に留意.
         """
-        self.__name = self.sysname_env + "-" + db_name + "-rds"
+        self.__name = self.sys_stage + "-" + db_name + "-rds"
         return self
 
     def rds_cluster(self, db_name):
         """
         RDSクラスタ名を一意に生成. システム名+環境名, DB名を利用.
         """
-        self.__name = self.sysname_env + "-" + db_name + "-cluster"
+        self.__name = self.sys_stage + "-" + db_name + "-cluster"
         return self
 
     def add_common_tags(self, scope: Construct):
@@ -231,7 +230,7 @@ class StackProps:
         スタック内のリソースに、システム名・サービス名・環境(test/stg/prd等)のタグを追加する
         """
         cdk.Tags.of(scope).add("SystemName", self.sysname)
-        cdk.Tags.of(scope).add("Env", self.env)
+        cdk.Tags.of(scope).add("Env", self.stage)
 
     def add_tag(self, scope: Construct, key: str, value: str):
         """
@@ -244,11 +243,11 @@ class StackProps:
 リソース名生成処理の単体テスト用関数
 """
 if __name__ == "__main__":
-    dotenv_path = join(dirname(__file__), "../.env")
-    load_dotenv(dotenv_path)
+    dotstage_path = join(dirname(__file__), "../.stage")
+    load_dotstage(dotstage_path)
     props = StackProps(
-        sysname=os.getenv("SYS_NAME"),
-        env=os.getenv("ENV"),
+        sysname=os.getstage("SYS_NAME"),
+        stage=os.getstage("ENV"),
     )
     stack_desc = "network"
     db_name = "db-app"
