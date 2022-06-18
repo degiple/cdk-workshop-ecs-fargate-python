@@ -78,7 +78,7 @@ $ cdk bootstrap
 
 ただ、現在のコードではバプリックネットワークしか作成されません…
 
-- AWS ECS をデプロイするのに最適なプライベートサブネットを追加するコードを追加して、以下コマンドを実行して下さい
+- AWS ECS fargate をデプロイするために、プライベートサブネットを作成するコードを追加し、以下コマンドでデプロイして下さい
 
 ```shell
 $ cdk deploy cocrea-dev-network-stack
@@ -86,11 +86,13 @@ $ cdk deploy cocrea-dev-network-stack
 
 ### 3. WebAppStackの準備
 
-ネットワークが準備出来たので、まずはサンプルのコンテナを AWS ECS fargate でデプロイしましょう！
+ネットワークは正常に作成できましたでしょうか？
 
-ECSのコード自体は[このファイル](stacks/webapp.py)で準備されているようですが、どうやら aws cdk で認識されていないようです…
+次に、サンプルのコンテナを AWS ECS fargate でデプロイしましょう！
 
-- [app.py](app.py)を修正し、cdk list を実行した時に、WebApp用のスタックが表示されるようにして下さい
+ただ、ECS fargate 用のスタックは[このファイル](stacks/webapp.py)で準備されているようですが、どうやら aws cdk で認識されていないようです…
+
+- [app.py](app.py)を修正し、cdk list を実行した時に、以下２つのスタックが表示されるようにして下さい
 
 ```shell
 $ cdk list
