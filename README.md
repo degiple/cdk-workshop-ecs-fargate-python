@@ -1,58 +1,45 @@
 
-# Welcome to your CDK Python project!
+# AWS CDK コンテナ構築シリーズ WebApp開発編 with Python
 
-This is a blank project for Python development with CDK.
+AWS CDK と Python による コンテナのWebApp構築を学ぶためのコンテンツです
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+# ハンズオンの準備
 
-This project is set up like a standard Python project.  The initialization
-process also creates a virtualenv within this project, stored under the `.venv`
-directory.  To create the virtualenv it assumes that there is a `python3`
-(or `python` for Windows) executable in your path with access to the `venv`
-package. If for any reason the automatic creation of the virtualenv fails,
-you can create the virtualenv manually.
+環境準備に不安な方向け
 
-To manually create a virtualenv on MacOS and Linux:
+## AWSアカウント
 
-```
-$ python3 -m venv .venv
-```
+AWSアカウントをご準備下さい
+[AWS にサインアップ](https://portal.aws.amazon.com/billing/signup?refid=ps_a134p000006gta5aae&trkcampaign=acq_paid_search_brand&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation&language=ja_jp#/start)
 
-After the init process completes and the virtualenv is created, you can use the following
-step to activate your virtualenv.
+もし新規作成される場合、クレジットカードの登録が必要になりますが、今回のハンズオンでは無料枠の範囲となりますので、過度な操作をしない限り、支払いは不要となる見込みです。
 
-```
-$ source .venv/bin/activate
-```
+## GitPod
 
-If you are a Windows platform, you would activate the virtualenv like this:
+このコンテンツでは、GitPodの利用を推奨しています。
 
-```
-% .venv\Scripts\activate.bat
-```
+以下の手順に従って、GitPodの準備を行なって下さい。
 
-Once the virtualenv is activated, you can install the required dependencies.
+1. [GitHubアカウントを作成する](https://pengi-n.co.jp/blog/github-account/)
+1. Chrome拡張機能 [Gitpod - Always ready to code](https://chrome.google.com/webstore/detail/gitpod-always-ready-to-co/dodmmooeoklaejobgleioelladacbeki) をインストールする。
+1. [cdk-workshop-ecs-fargate-python](https://github.com/degiple/cdk-workshop-ecs-fargate-python) にアクセスし、表示されている Gitpod ボタンをクリックする。
+1. 作成したGitHubアカウントでログインし、GitHubとGitPodの連携を承認する。
+1. ブラウザでIDEが起動される。
+1. [AWS CLIの手順](https://cdkworkshop.com/15-prerequisites/200-account.html)に沿って、IDEでCLIのクレデンシャルを設定する。
 
-```
-$ pip install -r requirements.txt
-```
 
-At this point you can now synthesize the CloudFormation template for this code.
+## AWS CDK の動作確認
 
-```
-$ cdk synth
+以下コマンドを実行し、正常終了することを確認して下さい。
+
+```shell
+$ cdk bootstrap
 ```
 
-To add additional dependencies, for example other CDK libraries, just add
-them to your `setup.py` file and rerun the `pip install -r requirements.txt`
-command.
-
-## Useful commands
+# Useful commands
 
  * `cdk ls`          list all stacks in the app
  * `cdk synth`       emits the synthesized CloudFormation template
  * `cdk deploy`      deploy this stack to your default AWS account/region
  * `cdk diff`        compare deployed stack with current state
  * `cdk docs`        open CDK documentation
-
-Enjoy!
