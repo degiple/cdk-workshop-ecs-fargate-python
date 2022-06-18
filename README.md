@@ -34,6 +34,7 @@ AWSアカウントをご準備下さい
 
 ```shell
 # aws認証情報が正しいかどうか
+
 $ aws iam list-users
 {
     "Users": [
@@ -47,8 +48,10 @@ $ aws iam list-users
         ~
     ]
 }
-
+```
+```
 # cdkコマンドが正しく動作するかどうか
+
 $ cdk list
 cocrea-dev-network-stack
 ```
@@ -66,7 +69,7 @@ AWS CDK で あなたのAWSアカウント にアクセスしたいのですが�
 以下コマンドを実行し、エラー内容を確認して、何とか正常終了させて下さい！
 
 ```shell
-cdk bootstrap
+$ cdk bootstrap
 ```
 
 ### 2. プライベートサブネットの追加
@@ -78,8 +81,7 @@ cdk bootstrap
 AWS ECS をデプロイするのに最適なプライベートサブネットを追加するコードを追加して、以下コマンドを実行して下さい！
 
 ```shell
-# VPCネットワークのデプロイ
-cdk deploy cocrea-dev-network-stack
+$ cdk deploy cocrea-dev-network-stack
 ```
 
 ### 3. WebAppStackの準備
@@ -91,8 +93,7 @@ ECSのコード自体は[このファイル](stacks/webapp.py)で準備されて
 [app.py](app.py)を修正し、cdk list を実行した時に、WebApp用のスタックが表示されるようにして下さい。
 
 ```shell
-# WebApp用のスタックが追加で表示されているか？
-cdk list
+$ cdk list
 cocrea-dev-network-stack
 cocrea-dev-webapp-stack
 ```
@@ -105,11 +106,11 @@ cocrea-dev-webapp-stack
 
 
 ```shell
-# VPCネットワークのデプロイ
-cdk deploy cocrea-dev-webapp-stack
+$ cdk deploy cocrea-dev-webapp-stack
 ```
 
 もし正常にデプロイされれば、アクセスURLが発行されます！
+<img width="1171" alt="image" src="https://user-images.githubusercontent.com/65447508/174446575-be92c314-00c8-45fb-a8bf-dba84aeb5932.png">
 
 
 ###  5. コンテナイメージの変更
