@@ -19,9 +19,9 @@ props = StackProps(
     stage=app.node.try_get_context("stage"),
 )
 
-# account = app.node.try_get_context("account")  # 問題候補
-# region = app.node.try_get_context("region")
-# env = cdk.Environment(account=account, region=region)
+account = app.node.try_get_context("account")
+region = app.node.try_get_context("region")
+env = cdk.Environment(account=account, region=region)
 
 
 ##############################
