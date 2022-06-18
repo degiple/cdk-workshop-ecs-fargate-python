@@ -1,11 +1,11 @@
 {
   "workbench.iconTheme": "material-icon-theme",
-  "workbench.colorTheme": "Visual Studio Dark",
+  "workbench.colorTheme": "GitHub Dark Default",
   "editor.formatOnSave": true,
   "files.autoSave": "afterDelay",
   // black
   "python.formatting.provider": "black",
-  "python.formatting.blackArgs": ["--line-length", "100"],
+  "python.formatting.blackArgs": ["--line-length", "80"],
   // isort
   "editor.codeActionsOnSave": {
     "source.organizeImports": true
@@ -18,7 +18,7 @@
   "python.linting.lintOnSave": true,
   "python.linting.flake8Args": [
     "--max-line-length",
-    "100",
+    "80",
     "--ignore=F405,W291,W503"
   ]
 }
