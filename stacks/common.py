@@ -243,12 +243,9 @@ class StackProps:
 リソース名生成処理の単体テスト用関数
 """
 if __name__ == "__main__":
-    dotstage_path = join(dirname(__file__), "../.stage")
-    load_dotstage(dotstage_path)
-    props = StackProps(
-        sysname=os.getstage("SYS_NAME"),
-        stage=os.getstage("ENV"),
-    )
+
+    props = StackProps(sysname="sysname", stage="stage")
+
     stack_desc = "network"
     db_name = "db-app"
     print(props.stack(stack_desc).name)
