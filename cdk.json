@@ -27,7 +27,7 @@
       "aws",
       "aws-cn"
     ],
-    "account": "<your-aws-account-number>",
+    "account": "122333444455555",
     "region": "ap-northeast-1",
     "sysname": "cocrea",
     "stage": "dev"

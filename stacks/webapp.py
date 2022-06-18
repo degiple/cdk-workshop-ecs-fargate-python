@@ -31,21 +31,20 @@ class WebAppStack(Stack):
         # 0.25 | 512, 1024, 2048
         # 0.5  | 1024, 2048, 3072, 4096
         # 1    | 2048, 3072, 4096, 5120, 6144, 7168, 8192
-        # 2    | 4096, 5120, 6144, 7168, 8192, 9216, 10240, 11264, 12288, 13312, 14336, 15360, 16384
-        # 4    | 8192, 9216, 10240, 11264, 12288, 13312, 1436, 15360, 16384, 17408, 18432, 19456, 20480,
-        #      | 21504, 22528, 23552, 24576, 25600, 26624, 2764, 28672, 2969, 30720
+        # 2    | 4096, 5120, 6144, 7168, 8192, 9216, 10240, 11264, ...
+        # 4    | 8192, 9216, 10240, 11264, 12288, 13312, 1436, 15360, ...
+        #      | 21504, 22528, 23552, 24576, 25600, 26624, 2764, 28672, ...
         fargate_task_definition = ecs.FargateTaskDefinition(
             self,
             id=f"{props.sys_stage}-ecs-task-definition",
             family=props.ecs_task_definition(app_name).name,
             cpu=256,
-            memory_limit_mib=512,  # 問題候補：あえて存在しない組み合わせにする？
+            memory_limit_mib=256,
         )
 
-        # first time daploy settings
         image = ecs.ContainerImage.from_registry(
             "amazon/amazon-ecs-sample"
-        )  # 問題候補：空にしておく？
+        ) 
 
         # Add app to containers
         container_app = fargate_task_definition.add_container(

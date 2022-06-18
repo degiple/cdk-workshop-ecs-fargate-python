@@ -4,7 +4,6 @@ import aws_cdk as cdk
 
 from stacks.common import StackProps
 from stacks.network import VpcStack
-from stacks.webapp import WebAppStack
 
 # コンストラクト生成
 app = cdk.App()
@@ -30,15 +29,7 @@ env = cdk.Environment(account=account, region=region)
 
 # ネットワークのデプロイ
 network = VpcStack(
-    app, construct_id=f"{props.sys_stage}-network-stack", props=props
-)
-
-# Webアプリケーションのデプロイ（問題にする）
-webapp = WebAppStack(
-    app,
-    construct_id=f"{props.sys_stage}-webapp-stack",
-    vpc=network.vpc,
-    props=props,
+    app, construct_id=f"{props.sys_stage}-network-stack", props=props, env=env
 )
 
 
