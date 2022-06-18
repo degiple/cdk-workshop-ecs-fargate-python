@@ -7,7 +7,7 @@ AWS CDK と Python による コンテナのWebApp構築を学ぶためのコン
 
 環境準備に不安な方向け
 
-###AWSアカウント
+### AWSアカウント
 
 AWSアカウントをご準備下さい
 [AWS にサインアップ](https://portal.aws.amazon.com/billing/signup?refid=ps_a134p000006gta5aae&trkcampaign=acq_paid_search_brand&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation&language=ja_jp#/start)
@@ -32,9 +32,9 @@ AWSアカウントをご準備下さい
 
 以下コマンドを実行し、それぞれ正常終了することを確認して下さい。
 
-```shell
-# aws認証情報が正しいかどうか
+- aws認証情報が正しいかどうか
 
+```shell
 $ aws iam list-users
 {
     "Users": [
@@ -49,9 +49,9 @@ $ aws iam list-users
     ]
 }
 ```
-```
-# cdkコマンドが正しく動作するかどうか
 
+- cdkコマンドが正しく動作するかどうか
+```shell
 $ cdk list
 cocrea-dev-network-stack
 ```
@@ -66,7 +66,7 @@ cocrea-dev-network-stack
 
 AWS CDK で あなたのAWSアカウント にアクセスしたいのですが、どうやら設定値がおかしいようです…
 
-以下コマンドを実行し、エラー内容を確認して、何とか正常終了させて下さい！
+- 以下コマンドを実行し、エラー内容を確認して、何とか正常終了させて下さい
 
 ```shell
 $ cdk bootstrap
@@ -78,7 +78,7 @@ $ cdk bootstrap
 
 ただ、現在のコードではバプリックネットワークしか作成されません…
 
-AWS ECS をデプロイするのに最適なプライベートサブネットを追加するコードを追加して、以下コマンドを実行して下さい！
+- AWS ECS をデプロイするのに最適なプライベートサブネットを追加するコードを追加して、以下コマンドを実行して下さい
 
 ```shell
 $ cdk deploy cocrea-dev-network-stack
@@ -90,7 +90,7 @@ $ cdk deploy cocrea-dev-network-stack
 
 ECSのコード自体は[このファイル](stacks/webapp.py)で準備されているようですが、どうやら aws cdk で認識されていないようです…
 
-[app.py](app.py)を修正し、cdk list を実行した時に、WebApp用のスタックが表示されるようにして下さい。
+- [app.py](app.py)を修正し、cdk list を実行した時に、WebApp用のスタックが表示されるようにして下さい
 
 ```shell
 $ cdk list
@@ -104,12 +104,12 @@ cocrea-dev-webapp-stack
 
 上手くいけばよいのですが、もしかしたら何かコードに誤りがあるかもしれません…
 
-
 ```shell
 $ cdk deploy cocrea-dev-webapp-stack
 ```
 
 もし正常にデプロイされれば、アクセスURLが発行されます！
+
 <img width="1171" alt="image" src="https://user-images.githubusercontent.com/65447508/174446575-be92c314-00c8-45fb-a8bf-dba84aeb5932.png">
 
 
@@ -118,6 +118,9 @@ $ cdk deploy cocrea-dev-webapp-stack
 無事に AWS ECS fargate はデプロイされましたでしょうか！？
 
 最後にお願いなのですが、表示されるWeb画面を [Nginx](https://www.nginx.co.jp/) に変更してほしいです！
+
+<img width="529" alt="image" src="https://user-images.githubusercontent.com/65447508/174446860-13d1b2f9-29d3-4238-9524-ae47226a404a.png">
+
 
 
 # Useful commands
