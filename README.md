@@ -3,6 +3,18 @@
 
 AWS CDK と Python による コンテナのWebApp構築を学ぶためのコンテンツです
 
+- [ハンズオンの準備](#ハンズオンの準備)
+  - [AWSアカウント](#awsアカウント)
+  - [GitPod](#gitpod)
+  - [動作確認](#動作確認)
+- [ハンズオン！！](#ハンズオン)
+  - [1. AWS CDK でアクセスする](#1-aws-cdk-でアクセスする)
+  - [2. プライベートサブネットの追加](#2-プライベートサブネットの追加)
+  - [3. WebAppStackの準備](#3-webappstackの準備)
+  - [4. WebAppStackの修正とデプロイ](#4-webappstackの修正とデプロイ)
+  - [5. コンテナイメージの変更](#5-コンテナイメージの変更)
+- [CDK help](#cdk-help)
+
 ## ハンズオンの準備
 
 環境準備に不安な方向け
@@ -28,7 +40,7 @@ AWSアカウントをご準備下さい
 1. [AWS CLIの手順](https://cdkworkshop.com/15-prerequisites/200-account.html)に沿って、IDEでCLIのクレデンシャルを設定する。
 
 
-### AWSの動作確認
+### 動作確認
 
 以下コマンドを実行し、それぞれ正常終了することを確認して下さい。
 
@@ -157,3 +169,36 @@ $ cdk destroy --all
 
 ユーザー（[cdk-workshop](https://console.aws.amazon.com/iam/home#/users/cdk-workshop)）は削除されませんので、不要な方は削除お願いします。
 
+
+## CDK help
+
+```shell
+Usage: cdk -a <cdk-app> COMMAND
+
+Commands:
+  cdk list [STACKS..]             Lists all stacks in the app      [aliases: ls]
+  cdk synthesize [STACKS..]       Synthesizes and prints the CloudFormation
+                                  template for this stack       [aliases: synth]
+  cdk bootstrap [ENVIRONMENTS..]  Deploys the CDK toolkit stack into an AWS
+                                  environment
+  cdk deploy [STACKS..]           Deploys the stack(s) named STACKS into your
+                                  AWS account
+  cdk import [STACK]              Import existing resource(s) into the given
+                                  STACK
+  cdk watch [STACKS..]            Shortcut for 'deploy --watch'
+  cdk destroy [STACKS..]          Destroy the stack(s) named STACKS
+  cdk diff [STACKS..]             Compares the specified stack with the deployed
+                                  stack or a local template file, and returns
+                                  with status 1 if any difference is found
+  cdk metadata [STACK]            Returns all metadata associated with this
+                                  stack
+  cdk acknowledge [ID]            Acknowledge a notice so that it does not show
+                                  up anymore                      [aliases: ack]
+  cdk notices                     Returns a list of relevant notices
+  cdk init [TEMPLATE]             Create a new, empty CDK project from a
+                                  template.
+  cdk context                     Manage cached context values
+  cdk docs                        Opens the reference documentation in a browser
+                                                                  [aliases: doc]
+  cdk doctor                      Check your set-up for potential problems
+```
