@@ -119,16 +119,41 @@ $ cdk deploy cocrea-dev-webapp-stack
 
 無事に AWS ECS fargate はデプロイされましたでしょうか！？
 
-最後にお願いなのですが、表示されるWeb画面を [Nginx](https://www.nginx.co.jp/) に変更してほしいです！
+上手く出来た方は、少し構成を変えてみましょう！
+
+- 表示されるWeb画面を [Nginx](https://www.nginx.co.jp/) に変更してください
 
 <img width="529" alt="image" src="https://user-images.githubusercontent.com/65447508/174446860-13d1b2f9-29d3-4238-9524-ae47226a404a.png">
 
 
+## ハンズオンの終了
 
-# Useful commands
+お疲れ様でした！
 
- * `cdk list`          list all stacks in the app
- * `cdk synth`       emits the synthesized CloudFormation template
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk docs`        open CDK documentation
+最後に、AWSリソースの削除を忘れないようにして下さいね！
+
+### CDKでデプロイしたリソースの削除
+
+```shell
+$ cdk destroy --all
+```
+
+### CloudFormation
+
+[スタック](https://ap-northeast-1.console.aws.amazon.com/cloudformation/home)にて、CDK Toolkitを削除して下さい。
+（もし今後作業する予定がある方は、そのままで大丈夫です）
+
+<img width="898" alt="image" src="https://user-images.githubusercontent.com/65447508/174463081-0337e064-a020-44c7-936a-0a5c97597adb.png">
+
+
+### Dynamodb
+
+もし[テーブル](https://ap-northeast-1.console.aws.amazon.com/dynamodbv2/home)が残った場合、以下の手順で削除可能です。
+
+<img width="911" alt="image" src="https://user-images.githubusercontent.com/65447508/174463077-2c59088b-c338-4e67-8f6a-080c510530be.png">
+
+
+### IAM
+
+ユーザー（[cdk-workshop](https://console.aws.amazon.com/iam/home#/users/cdk-workshop)）は削除されませんので、不要な方は削除お願いします。
+
