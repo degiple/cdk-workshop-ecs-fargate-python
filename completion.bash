@@ -1,5 +1,11 @@
+
+# Update PS1
+PS1='\n${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\n\$ '
+
+# Tab completion for AWS CLI
 complete -C '/usr/local/bin/aws_completer' aws
 
+# Tab completion for AWS CDK CLI
 function _cdk_completer {
   STACK_CMDS="list synthesize bootstrap deploy destroy diff metadata init context docs doctor"
 
