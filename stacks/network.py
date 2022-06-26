@@ -12,14 +12,13 @@ class VpcStack(Stack):
     ) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
-        # VPCのデプロイ
         vpc = ec2.Vpc(
             self,
             id=f"{props.sys_stage}-vpc",
             cidr="10.1.0.0/16",
             max_azs=2,
             nat_gateways=2,
-            subnet_configuration=[  # 問題にする
+            subnet_configuration=[
                 ec2.SubnetConfiguration(
                     name=props.subnet("public").name,
                     cidr_mask=24,
@@ -28,7 +27,6 @@ class VpcStack(Stack):
             ],
         )
 
-        # 名前をつける
         cdk.Tags.of(vpc).add(key="Name", value=props.vpc().name)
         for i, pubsub in enumerate(vpc.public_subnets):
             cdk.Tags.of(pubsub).add(

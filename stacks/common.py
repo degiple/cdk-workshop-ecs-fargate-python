@@ -1,6 +1,4 @@
-import os
 import sys
-from os.path import dirname, join
 from typing import Optional
 
 import aws_cdk as cdk
@@ -110,7 +108,9 @@ class StackProps:
         """
         CodeBuildのPipeline Project名を一意に生成. システム名+環境名, アプリ名を利用.
         """
-        self.__name = self.sys_stage + "-" + app_name + "-codebuild-pipeline-project"
+        self.__name = (
+            self.sys_stage + "-" + app_name + "-codebuild-pipeline-project"
+        )
         return self
 
     def codepipeline(self, app_name):
@@ -124,21 +124,27 @@ class StackProps:
         """
         CodePipelineの生成物名を一意に生成. システム名+環境名, アプリ名を利用.
         """
-        self.__name = self.sys_stage + "-" + app_name + "codepipeline-source-artifact"
+        self.__name = (
+            self.sys_stage + "-" + app_name + "codepipeline-source-artifact"
+        )
         return self
 
     def codepipeline_build_artifact(self, app_name):
         """
         CodePipelineの生成物名を一意に生成. システム名+環境名, アプリ名を利用.
         """
-        self.__name = self.sys_stage + "-" + app_name + "-codepipeline-build-artifact"
+        self.__name = (
+            self.sys_stage + "-" + app_name + "-codepipeline-build-artifact"
+        )
         return self
 
     def secretsmanager(self, app_name):
         """
         SecretsManagerのSecrets名を一意に生成. システム名+環境名, アプリ名を利用.
         """
-        self.__name = self.sys_stage + "-" + app_name + "-secretsmanager-secrets"
+        self.__name = (
+            self.sys_stage + "-" + app_name + "-secretsmanager-secrets"
+        )
         return self
 
     def iam_role(self, role_name):
@@ -187,14 +193,23 @@ class StackProps:
         """
         ECR Task定義名を一意に生成. システム名+環境名, 定義名を利用.
         """
-        self.__name = self.sys_stage + "-" + definition_name + "-ecs-task-definition"
+        self.__name = (
+            self.sys_stage + "-" + definition_name + "-ecs-task-definition"
+        )
         return self
 
     def ecs_container_name(self, app_name, container_name):
         """
         ECS コンテナ名を一意に生成. システム名+環境名, アプリ名, コンテナ種(appやdbなど)を付与するアプリ名を利用.
         """
-        self.__name = self.sys_stage + "-" + app_name + "-" + container_name + "-container"
+        self.__name = (
+            self.sys_stage
+            + "-"
+            + app_name
+            + "-"
+            + container_name
+            + "-container"
+        )
         return self
 
     def log_prefix(self, app_name):

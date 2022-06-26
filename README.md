@@ -97,6 +97,7 @@ $ cdk bootstrap
 ただ、現在のコードではバプリックネットワークしか作成されません…
 
 - AWS ECS fargate をデプロイするために、プライベートサブネットを作成するコードを追加し、以下コマンドでデプロイして下さい
+- サブネットの名前にも注意して下さいね！
 
 ```shell
 $ cdk deploy cocrea-dev-network-stack
