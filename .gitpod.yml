@@ -5,7 +5,7 @@
 
 # image:
 #   file: .gitpod.Dockerfile
-image: degiple/gitpod-workspace-awscdk-python
+image: degiple/cdk-workshop-ecs-fargate-python
 
 tasks:
   - init: python3 -m pip install --upgrade pip && python3 -m pip install -r requirements.txt && python3 -m pip install -r requirements-dev.txt 
