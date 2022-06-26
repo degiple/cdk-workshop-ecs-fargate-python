@@ -7,7 +7,7 @@ complete -C '/usr/local/bin/aws_completer' aws
 
 # Tab completion for AWS CDK CLI
 function _cdk_completer {
-  STACK_CMDS="list synthesize bootstrap deploy destroy diff metadata init context docs doctor"
+  STACK_CMDS="list synthesize bootstrap deploy import watch destroy diff metadata acknowledge notices init context docs doctor"
 
   if [ "$3" == "cdk" ]; then
     COMPREPLY=($(compgen -W "$STACK_CMDS" $2))
