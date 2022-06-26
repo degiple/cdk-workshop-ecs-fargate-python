@@ -1,6 +1,6 @@
 
 # Update PS1
-PS1='\n${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\n\$ '
+PS1='\n\[[01;32m\]\u\[[00m\] \[[01;34m\]\w\[[00m\]$(__git_ps1 " (%s)") \n$ '
 
 # Tab completion for AWS CLI
 complete -C '/usr/local/bin/aws_completer' aws
