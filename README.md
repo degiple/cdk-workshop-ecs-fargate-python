@@ -128,7 +128,7 @@ cocrea-dev-webapp-stack
 $ cdk deploy cocrea-dev-webapp-stack
 ```
 
-もし正常にデプロイされれば、アクセス URL が発行されます！
+正常にデプロイされれば10分程度で完了し、アクセス URL が発行されます！
 
 <img width="1171" alt="image" src="https://user-images.githubusercontent.com/65447508/174446575-be92c314-00c8-45fb-a8bf-dba84aeb5932.png">
 
