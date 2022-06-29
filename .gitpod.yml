@@ -6,7 +6,7 @@
 image: degiple/cdk-workshop-ecs-fargate-python
 
 tasks:
-  - init: python3 -m pip install --upgrade pip && python3 -m pip install -r requirements.txt && python3 -m pip install -r requirements-dev.txt 
+  - command: python3 -m pip install --upgrade pip && python3 -m pip install -r requirements.txt && python3 -m pip install -r requirements-dev.txt 
 
 vscode:
   extensions:
