@@ -20,5 +20,13 @@
     "--max-line-length",
     "80",
     "--ignore=F405,W291,W503"
+  ],
+  "python.analysis.extraPaths": [
+    "${workspaceFolder}/stacks",
+    "/home/gitpod/.pyenv/versions/3.8.13/lib/python3.8/site-packages/"
+  ],
+  "python.autoComplete.extraPaths": [
+    "${workspaceFolder}/stacks",
+    "/home/gitpod/.pyenv/versions/3.8.13/lib/python3.8/site-packages/"
   ]
 }
